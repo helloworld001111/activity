@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dubei.activity.mapper.ActivityGodsMapper">
+  <resultMap id="BaseResultMap" type="com.example.dubei.activity.pojo.ActivityGods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+    <result column="gods_name" jdbcType="VARCHAR" property="godsName" />
+    <result column="gods_desc" jdbcType="VARCHAR" property="godsDesc" />
+    <result column="gods_price" jdbcType="REAL" property="godsPrice" />
+    <result column="gods_number" jdbcType="INTEGER" property="godsNumber" />
+    <result column="effect_start_time" jdbcType="TIMESTAMP" property="effectStartTime" />
+    <result column="effect_end_time" jdbcType="TIMESTAMP" property="effectEndTime" />
+    <result column="is_effective" jdbcType="TINYINT" property="isEffective" />
+    <result column="is_share_group_get" jdbcType="TINYINT" property="isShareGroupGet" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pic_url, gods_name, gods_desc, gods_price, gods_number, effect_start_time, effect_end_time, 
+    is_effective, is_share_group_get
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from activity_gods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity_gods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.dubei.activity.pojo.ActivityGods">
+    insert into activity_gods (id, pic_url, gods_name, 
+      gods_desc, gods_price, gods_number, 
+      effect_start_time, effect_end_time, is_effective, 
+       is_share_group_get)
+    values (#{id,jdbcType=INTEGER}, #{picUrl,jdbcType=VARCHAR}, #{godsName,jdbcType=VARCHAR}, 
+      #{godsDesc,jdbcType=VARCHAR}, #{godsPrice,jdbcType=REAL}, #{godsNumber,jdbcType=INTEGER}, 
+      #{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP}, #{isEffective,jdbcType=TINYINT}, 
+       #{isShareGroupGet,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.dubei.activity.pojo.ActivityGods">
+    insert into activity_gods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="picUrl != null">
+        pic_url,
+      </if>
+      <if test="godsName != null">
+        gods_name,
+      </if>
+      <if test="godsDesc != null">
+        gods_desc,
+      </if>
+      <if test="godsPrice != null">
+        gods_price,
+      </if>
+      <if test="godsNumber != null">
+        gods_number,
+      </if>
+      <if test="effectStartTime != null">
+        effect_start_time,
+      </if>
+      <if test="effectEndTime != null">
+        effect_end_time,
+      </if>
+      <if test="isEffective != null">
+        is_effective,
+      </if>
+      <if test="isShareGroupGet != null">
+        is_share_group_get,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="godsName != null">
+        #{godsName,jdbcType=VARCHAR},
+      </if>
+      <if test="godsDesc != null">
+        #{godsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="godsPrice != null">
+        #{godsPrice,jdbcType=REAL},
+      </if>
+      <if test="godsNumber != null">
+        #{godsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="effectStartTime != null">
+        #{effectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectEndTime != null">
+        #{effectEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEffective != null">
+        #{isEffective,jdbcType=TINYINT},
+      </if>
+      <if test="isShareGroupGet != null">
+        #{isShareGroupGet,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dubei.activity.pojo.ActivityGods">
+    update activity_gods
+    <set>
+      <if test="picUrl != null">
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="godsName != null">
+        gods_name = #{godsName,jdbcType=VARCHAR},
+      </if>
+      <if test="godsDesc != null">
+        gods_desc = #{godsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="godsPrice != null">
+        gods_price = #{godsPrice,jdbcType=REAL},
+      </if>
+      <if test="godsNumber != null">
+        gods_number = #{godsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="effectStartTime != null">
+        effect_start_time = #{effectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectEndTime != null">
+        effect_end_time = #{effectEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEffective != null">
+        is_effective = #{isEffective,jdbcType=TINYINT},
+      </if>
+      <if test="isShareGroupGet != null">
+        is_share_group_get = #{isShareGroupGet,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dubei.activity.pojo.ActivityGods">
+    update activity_gods
+    set pic_url = #{picUrl,jdbcType=VARCHAR},
+      gods_name = #{godsName,jdbcType=VARCHAR},
+      gods_desc = #{godsDesc,jdbcType=VARCHAR},
+      gods_price = #{godsPrice,jdbcType=REAL},
+      gods_number = #{godsNumber,jdbcType=INTEGER},
+      effect_start_time = #{effectStartTime,jdbcType=TIMESTAMP},
+      effect_end_time = #{effectEndTime,jdbcType=TIMESTAMP},
+      is_effective = #{isEffective,jdbcType=TINYINT},
+      is_share_group_get = #{isShareGroupGet,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!-- custome mapper -->
+  <select id="queryListByCondition" parameterType="hashmap" resultType="hashmap">
+    select pic_url picUrl,gods_name godsName,gods_desc godsDesc,gods_price godsPrice,gods_number godsNumber,is_share_group_get isShareGroupGet
+    ,is_effective isEffective,id from activity_gods
+     <where>
+       <if test="isEffective != null">
+         and is_effective = #{isEffective,jdbcType=TINYINT}
+       </if>
+       <if test="godsName != null">
+         and gods_name like #{godsName,jdbcType=VARCHAR}
+       </if>
+     </where>
+     order by id
+  </select>
+
+  <select id="queryCountByCondition" parameterType="hashmap" resultType="int">
+    select count(id) from activity_gods
+    <where>
+      <if test="isEffective != null">
+        and is_effective = #{isEffective,jdbcType=TINYINT}
+      </if>
+      <if test="godsName != null">
+        and gods_name like #{godsName,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <update id="loseEffect">
+    update activity_gods set is_effective = 0,effect_end_time = now() where is_effective = 1
+  </update>
+
+  <update id="decreaseGodsNumber" parameterType="int">
+    update activity_gods set gods_number = gods_number-1 where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

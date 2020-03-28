@@ -1,0 +1,62 @@
+spring:
+  datasource:
+    druid:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://127.0.0.1:3306/activity?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=round&serverTimezone=GMT%2B8&tinyInt1isBit=false
+      username: root
+      password: "abcABC123!!"
+      driver-class-name: com.mysql.jdbc.Driver
+      #     获取连接时最大等待时间，单位毫秒
+      max-wait: 60000
+      #      最大连接池数量
+      max-active: 80
+      #      初始化时建立物理连接的个数
+      initial-size: 20
+      #      最小连接池数量
+      min-idle: 40
+      #Destory线程中如果检测到当前连接的最后活跃时间和当前时间的差值大于minEvictableIdleTimeMillis，则关闭当前连接。
+      min-evictable-idle-time-millis: 600000
+      #      testWhileIdle的判断依据，详细看testWhileIdle属性的说明
+      time-between-eviction-runs-millis: 2000
+      #用来检测连接是否有效的sql，要求是一个查询语句。
+      validation-query: select 1
+      #      申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      test-while-idle: true
+      #      申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      test-on-borrow: false
+      #      归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      test-on-return: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+server:
+  tomcat:
+    max-swallow-size: 100MB
+mybatis:
+  mapper-locations: classpath:/mapper/mysql/*
+
+custome:
+  pic:
+    save:
+      folder: /root/projects/activity/upload
+  protocol:
+    name: https
+  domain:
+    name: www.yuanlaiyouni.vip
+  platform:
+    app-id: wx6899bb0fdf258608
+    app-secret: a5a593157c04d0da60761432ff83d0b6
+#读取日志配置文件
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO
+  file:
+    path: /root/logs/activity
+    name: activity

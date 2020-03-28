@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dubei.activity.mapper.ActivityUserGetdGodsMapper">
+  <resultMap id="BaseResultMap" type="com.example.dubei.activity.pojo.ActivityUserGetdGods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="gods_id" jdbcType="INTEGER" property="godsId" />
+    <result column="deliver_status" jdbcType="VARCHAR" property="deliverStatus" />
+    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_phone_number" jdbcType="VARCHAR" property="receiverPhoneNumber" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="transportation_id" jdbcType="VARCHAR" property="transportationId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, gods_id, deliver_status, receiver_address, receiver_name, receiver_phone_number, 
+    remark,create_time,transportation_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from activity_user_getd_gods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity_user_getd_gods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.dubei.activity.pojo.ActivityUserGetdGods">
+    insert into activity_user_getd_gods (id, user_id, gods_id, 
+      deliver_status, receiver_address, receiver_name, 
+      receiver_phone_number, remark,create_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{godsId,jdbcType=INTEGER}, 
+      #{deliverStatus,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, 
+      #{receiverPhoneNumber,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}),#{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.dubei.activity.pojo.ActivityUserGetdGods">
+    insert into activity_user_getd_gods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="godsId != null">
+        gods_id,
+      </if>
+      <if test="deliverStatus != null">
+        deliver_status,
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="receiverPhoneNumber != null">
+        receiver_phone_number,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="godsId != null">
+        #{godsId,jdbcType=INTEGER},
+      </if>
+      <if test="deliverStatus != null">
+        #{deliverStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhoneNumber != null">
+        #{receiverPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dubei.activity.pojo.ActivityUserGetdGods">
+    update activity_user_getd_gods
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="godsId != null">
+        gods_id = #{godsId,jdbcType=INTEGER},
+      </if>
+      <if test="deliverStatus != null">
+        deliver_status = #{deliverStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhoneNumber != null">
+        receiver_phone_number = #{receiverPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transportationId != null">
+        transportation_id = #{transportationId,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dubei.activity.pojo.ActivityUserGetdGods">
+    update activity_user_getd_gods
+    set user_id = #{userId,jdbcType=INTEGER},
+      gods_id = #{godsId,jdbcType=INTEGER},
+      deliver_status = #{deliverStatus,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone_number = #{receiverPhoneNumber,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--custome mapper-->
+  <select id="queryListByCondition" parameterType="hashmap" resultType="hashmap">
+    select t3.wechat_nick_name wechatNickName,t3.real_name realName,t1.deliver_status deliverStatus,t2.pic_url picUrl,t2.gods_name godsName,t2.gods_price godsPrice,
+    t2.gods_desc godsDesc,t1.receiver_address receiverAddress,t1.receiver_name receiverName,
+    t1.receiver_phone_number receiverPhoneNumber,t1.gods_id godsId,t1.remark as remake,t1.id as id,t1.transportation_id transportationId
+    from activity_user_getd_gods t1,activity_gods t2,activity_user t3
+     where t1.gods_id = t2.id and t1.user_id = t3.id
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+    <if test="realName != null">
+      and t3.real_name = #{realName,jdbcType=VARCHAR}
+    </if>
+      <if test="deliverStatus != null">
+        and deliver_status = #{deliverStatus,jdbcType=VARCHAR}
+      </if>
+      order by t1.id
+  </select>
+
+  <select id="queryCountByCondition" parameterType="hashmap" resultType="int">
+    select count(*)
+    from activity_user_getd_gods t1,activity_gods t2,activity_user t3
+    where t1.gods_id = t2.id and t1.user_id = t3.id
+    <if test="userId != null">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="realName != null">
+      and t3.real_name = #{realName,jdbcType=VARCHAR}
+    </if>
+    <if test="deliverStatus != null">
+      and deliver_status = #{deliverStatus,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>
