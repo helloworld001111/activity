@@ -6,6 +6,7 @@ import com.example.dubei.activity.pojo.ActivitySlideshow;
 import com.example.dubei.activity.service.ActivitySlideshowService;
 import com.example.dubei.activity.util.FileUtils;
 import com.example.dubei.activity.util.ParameterHandlerUtils;
+import com.example.dubei.activity.util.PicUtils;
 import com.example.dubei.activity.util.RandomUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +67,12 @@ public class ActivitySlideshowServiceImpl implements ActivitySlideshowService {
     @Override
     public void updateById(Integer id,List<String> imgList,String href) throws IOException {
 //        String newFileName = FileUtils.copyFiles(file,new File(picUploadFolder+File.separator+Constant.SLIDE_SHOW_FOLDER));
-        List<String> urlList = FileUtils.base64UpLoadPng(imgList,new File(picUploadFolder+File.separator+Constant.SLIDE_SHOW_FOLDER),Constant.HTTPS_SLIDE_SHOW_URL);
         ActivitySlideshow activitySlideshow = new ActivitySlideshow();
-        activitySlideshow.setPicUrl(urlList.get(0));
+        boolean upload = PicUtils.validatePicUpload(imgList);
+        if(upload){
+            List<String> urlList = FileUtils.base64UpLoadPng(imgList,new File(picUploadFolder+File.separator+Constant.SLIDE_SHOW_FOLDER),Constant.HTTPS_SLIDE_SHOW_URL);
+            activitySlideshow.setPicUrl(urlList.get(0));
+        }
         activitySlideshow.setHrefLink(href);
         activitySlideshow.setId(id);
         daoMyBatis.update("com.example.dubei.activity.mapper.ActivitySlideshowMapper.updateByPrimaryKeySelective",activitySlideshow);

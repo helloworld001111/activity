@@ -14,7 +14,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +30,14 @@ public class ActivityUserController {
     private ActivityUserService activityUserService;
 
     @RequestMapping("queryById")
-    public void queryById(Integer userId, HttpServletResponse response) throws IOException {
+    public void queryById(HttpServletRequest request,Integer userId, HttpSession session, HttpServletResponse response) throws IOException {
+        String redirectUrl = request.getParameter("redirectUrl");
+        String name = request.getParameter("name");
+        System.out.println(name+"==="+redirectUrl);
         log.info(ActionHelperUtils.getRequestParams());
         Map<String,Object> map = activityUserService.queryById(userId);
-        ActionHelperUtils.generateResult(Result.success(map),response);
+//        ActionHelperUtils.generateResult(Result.success(map),response);
+        response.sendRedirect("https://www.baidu.com");
     }
 
     @RequestMapping("queryByCondition")

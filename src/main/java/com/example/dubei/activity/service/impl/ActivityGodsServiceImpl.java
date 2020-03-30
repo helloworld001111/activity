@@ -4,10 +4,7 @@ import com.example.dubei.activity.base.jdbc.DaoMyBatis;
 import com.example.dubei.activity.constant.Constant;
 import com.example.dubei.activity.pojo.ActivityGods;
 import com.example.dubei.activity.service.ActivityGodsService;
-import com.example.dubei.activity.util.ConcatUtils;
-import com.example.dubei.activity.util.FileUtils;
-import com.example.dubei.activity.util.ParameterHandlerUtils;
-import com.example.dubei.activity.util.RandomUtils;
+import com.example.dubei.activity.util.*;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,9 +61,13 @@ public class ActivityGodsServiceImpl implements ActivityGodsService {
     @Override
     @Transactional
     public void upload(List<String> imgList,Integer godsId, String godsName, String godsDesc, Float godsPrice, Integer godsNumber, Byte isShareGroupGet) throws IOException {
-        List<String> urlList = FileUtils.base64UpLoadPng(imgList,new File(picUploadFolder+File.separator+ Constant.GODS_FOLDER),Constant.HTTPS_GODS_URL);
         ActivityGods activityGods = new ActivityGods();
-        activityGods.setPicUrl(ConcatUtils.concat(urlList,','));
+        //包含base64说明是上传的图片
+        boolean upload = PicUtils.validatePicUpload(imgList);
+        if(upload) {
+            List<String> urlList = FileUtils.base64UpLoadPng(imgList, new File(picUploadFolder + File.separator + Constant.GODS_FOLDER), Constant.HTTPS_GODS_URL);
+            activityGods.setPicUrl(ConcatUtils.concat(urlList, ','));
+        }
         activityGods.setGodsName(godsName);
         activityGods.setGodsDesc(godsDesc);
         activityGods.setGodsPrice(godsPrice);

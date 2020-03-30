@@ -95,7 +95,7 @@
         #{wechatNickName,jdbcType=VARCHAR},
       </if>
       <if test="wechatPhotoUrl != null">
-        wechatPhotoUrl,
+        #{wechatPhotoUrl,jdbcType=VARCHAR},
       </if>
       <if test="realName != null">
         #{realName,jdbcType=VARCHAR},

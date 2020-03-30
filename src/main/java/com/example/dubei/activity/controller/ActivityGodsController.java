@@ -104,7 +104,7 @@ public class ActivityGodsController {
         ValidateUtils.notNull(godsPrice,"商品价格不能为空");
         ValidateUtils.notNull(godsNumber,"库存数量不能为空");
         ValidateUtils.notNull(isShareGroupGet,"能否通过分享微信群获取字段不能为空");
-//        activityGodsService.upload(imgList,godsId,godsName,godsDesc,godsPrice,godsNumber,isShareGroupGet);
+        activityGodsService.upload(imgList,godsId,godsName,godsDesc,godsPrice,godsNumber,isShareGroupGet);
         ActionHelperUtils.generateResult(Result.success(null),response);
     }
 

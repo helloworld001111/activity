@@ -69,21 +69,23 @@ public class WXLoginController {
      * @parameter
      */
     @RequestMapping(value = "/wxLogin", method = RequestMethod.GET)
-    public void wxLogin(HttpServletRequest request,
+    public void wxLogin(String redirectURL,HttpServletRequest request,
                           HttpServletResponse response)
             throws ParseException, IOException {
+        log.info("wxLogin-redirectURL:"+redirectURL);
         //这个url的域名必须要进行再公众号中进行注册验证，这个地址是成功后的回调地址
-        String backUrl= "https://www.yuanlaiyouni.vip/dist/";
+        String backUrl= "https://www.yuanlaiyouni.vip/wx/callBack?redirectURL=";
         // 第一步：用户同意授权，获取code
         String url ="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+ IdAndSecretApi.appID
-                + "&redirect_uri="+URLEncoder.encode(backUrl)
+                + "&redirect_uri="+URLEncoder.encode(backUrl+redirectURL)
                 + "&response_type=code"
                 + "&scope=snsapi_userinfo"
                 + "&state=STATE#wechat_redirect";
+//                + "&state=STATE"#wechat_redirect";
 
         log.info("forward重定向地址{" + url + "}");
-        //response.sendRedirect(url);
-        ActionHelperUtils.generateResult(Result.success(url),response);
+        response.sendRedirect(url);
+//        ActionHelperUtils.generateResult(Result.success(url),response);
 //        return "redirect:"+url;//必须重定向，否则不能成功
     }
     /**
@@ -99,7 +101,8 @@ public class WXLoginController {
      * @parameter
      */
     @RequestMapping(value = "/callBack", method = RequestMethod.GET)
-    public void callBack(ModelMap modelMap,HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void callBack(ModelMap modelMap,String redirectURL,HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("callBack-redirectURL:"+redirectURL);
         /*
          * start 获取微信用户基本信息
          */
@@ -183,7 +186,8 @@ public class WXLoginController {
         HashMap<String, Object> result = new HashMap<>();
         result.put("userId",userId);
         result.put("access_token",access_token);
-        ActionHelperUtils.generateResult(Result.success(result),resp);;
+//        ActionHelperUtils.generateResult(Result.success(result),resp);;
+        resp.sendRedirect(redirectURL+"?userId="+userId);
     }
 
 }

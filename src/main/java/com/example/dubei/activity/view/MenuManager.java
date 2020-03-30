@@ -46,7 +46,7 @@ public class MenuManager {
         ViewButton viewButton3 = new ViewButton();
         viewButton3.setName("商务合作");
         viewButton3.setType("view");
-        viewButton3.setUrl("https://www.yuanlaiyouni.vip/dist/?code=071Dh24v18pqDh02eK4v1LW14v1Dh245&state=STATE#/suhz");
+        viewButton3.setUrl("https://www.yuanlaiyouni.vip/dist/#/suhz");
 
         menu.setButton(new Button[] {viewButton1,viewButton3});
 //        menu.setButton(new Button[] {complexButton, clickButton2, complexButton1});
